@@ -10,29 +10,38 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
-class Square extends React.Component {
-  //add constructor to class o initialize the state
-  constructor(props){
-    super(props);
-    //always call super when 
-    //defining the constructor of a subclass
-    //all react component classes that have a 
-    //constructor should start with a super(props) call
-    this.state ={
-      value:null,
-    };
-  }
-  render() {
-    return (
-      <button className="square" 
-      onClick={() => this.props.onClick()}>
-        {this.props.value}
-      </button>
-    );
-  }
-  //this.setState from Onclick = tells react to 
-  //render that square whenever button clicked
-  //when you call setState in a compnent, react auto updates the child component inside
+// class Square extends React.Component {
+//   //add constructor to class o initialize the state
+//   constructor(props){
+//     super(props);
+//     //always call super when 
+//     //defining the constructor of a subclass
+//     //all react component classes that have a 
+//     //constructor should start with a super(props) call
+//     this.state ={
+//       value:null,
+//     };
+//   }
+//   render() {
+//     return (
+//       <button className="square" 
+//       onClick={() => this.props.onClick()}>
+//         {this.props.value}
+//       </button>
+//     );
+//   }
+//   //this.setState from Onclick = tells react to 
+//   //render that square whenever button clicked
+//   //when you call setState in a compnent, react auto updates the child component inside
+// }
+
+
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
 
 class Board extends React.Component {
@@ -41,6 +50,11 @@ class Board extends React.Component {
     this.state = {
       squares: Array(9).fill(null)
     }
+  }
+  handleClick(i){
+    const squares = this.state.squares.slice();
+    squares[i] = 'X';
+    this.setState({squares:squares})
   }
   renderSquare(i) {
     return <Square value={this.state.squares[i]}

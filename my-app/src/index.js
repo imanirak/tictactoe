@@ -11,18 +11,33 @@ ReactDOM.render(
   document.getElementById('root')
 );
 class Square extends React.Component {
+  //add constructor to class o initialize the state
+  constructor(props){
+    super(props);
+    //always call super when 
+    //defining the constructor of a subclass
+    //all react component classes that have a 
+    //constructor should start with a super(props) call
+    this.state ={
+      value:null,
+    };
+  }
   render() {
     return (
-      <button className="square">
-        {/* TODO */}
+      <button className="square" 
+      onClick={() => this.setState({value:'X'})}>
+        {this.state.value}
       </button>
     );
   }
+  //this.setState from Onclick = tells react to 
+  //render that square whenever button clicked
+  //when you call setState in a compnent, react auto updates the child component inside
 }
 
 class Board extends React.Component {
   renderSquare(i) {
-    return <Square />;
+    return <Square value={i}/>;
   }
 
   render() {
